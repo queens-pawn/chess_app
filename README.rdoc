@@ -1,28 +1,18 @@
-== README
+Queen's Pawn Chess
+===================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a chess app built in Ruby on Rails by the Queen's Pawn team for The [Firehose Project](http://www.thefirehoseproject.com/).
 
-Things you may want to cover:
+The Queen's Pawn team is composed of the following members:
 
-* Ruby version
+- [Alan Lim](https://github.com/alan24)
+- [Delaine Lawrence](https://github.com/Delaine)
+- [Johann Billar](https://github.com/JohannBillar)
+- [Lorna Marlow](https://github.com/llmarlow)
+- [Mark Eberhard](https://github.com/mce777)
 
-* System dependencies
+The Queen's Pawn team is led by [Kaoru Kohashigawa](https://github.com/KaoruDev).
 
-* Configuration
+Visit Queen's Pawn Chess live at [queens-pawn-chess.herokuapp.com/](https://queens-pawn-chess.herokuapp.com/)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+[ ![Codeship Status for queens-pawn/chess_app](https://codeship.com/projects/c735d8c0-7064-0133-1891-1efd56eb814e/status?branch=master)](https://codeship.com/projects/116547)
