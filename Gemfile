@@ -34,6 +34,12 @@ end
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
+# Include simple_form to create/style forms
+gem 'simple_form'
+
+# Include Devise version ‘>= 3.2.4’ to prevent Heroku issues
+gem 'devise', '>= 3.2.4'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
