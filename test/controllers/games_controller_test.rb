@@ -2,7 +2,8 @@ require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
   test "should get show" do
-    get :show
+    game = Game.create(:name => "Test")
+    get :show, :id => game.id
     assert_response :success
   end
 
