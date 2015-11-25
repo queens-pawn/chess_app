@@ -16,32 +16,12 @@ ActiveRecord::Schema.define(version: 20151125152305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bishops", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "games", force: true do |t|
     t.integer  "game_id"
     t.string   "name"
     t.integer  "white_player_id"
     t.integer  "black_player_id"
     t.integer  "winner_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "kings", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "knights", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pawns", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -54,16 +34,6 @@ ActiveRecord::Schema.define(version: 20151125152305) do
     t.datetime "updated_at"
     t.integer  "x_position"
     t.integer  "y_position"
-  end
-
-  create_table "queens", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "rooks", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
