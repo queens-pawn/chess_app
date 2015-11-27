@@ -5,7 +5,7 @@ class Piece < ActiveRecord::Base
     %w(King Queen Rook Bishop Knight Pawn)
   end
 
-  def self.color
+  def self.colors
     %w(white black)
   end
 end
