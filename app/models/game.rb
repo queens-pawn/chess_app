@@ -20,5 +20,7 @@ class Game < ActiveRecord::Base
     (0..7).each do |y|
       Piece.create {:type => 'Pawn', :color => 'black', :game_id => id, :x_position => 6, :y_position => y}
     end
+    Piece.create {:type => 'Rook', :color => 'black', :game_id => id, :x_position => 7, :y_position => 0}
+    Piece.create {:type => 'Rook', :color => 'black', :game_id => id, :x_position => 7, :y_position => 7}
   end
 end
