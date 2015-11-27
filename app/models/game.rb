@@ -26,6 +26,10 @@ class Game < ActiveRecord::Base
     Piece.create {:type => 'Knight', :color => 'black', :game_id => id, :x_position => 7, :y_position => 1}
     Piece.create {:type => 'Knight', :color => 'black', :game_id => id, :x_position => 7, :y_position => 6}
 
+    Piece.create {:type => 'Bishop', :color => 'black', :game_id => id, :x_position => 7, :y_position => 2}
+    Piece.create {:type => 'Bishop', :color => 'black', :game_id => id, :x_position => 7, :y_position => 5}
 
+    Piece.create {:type => 'King', :color => 'black', :game_id => id, :x_position => 7, :y_position => 4}
+    Piece.create {:type => 'Queen', :color => 'black', :game_id => id, :x_position => 7, :y_position => 3}
   end
 end
