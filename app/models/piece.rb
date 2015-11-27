@@ -1,6 +1,5 @@
 class Piece < ActiveRecord::Base
   belongs_to :game
-  # include ActiveModel::Validations
   validate :validate_color?
 
   def self.types
