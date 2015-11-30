@@ -18,6 +18,12 @@ class GamesController < ApplicationController
     end
   end
 
+  def update
+    @game = Game.find(params[:id])
+    @game.update_attributes(game_params)
+    redirect_to game_path(@game)
+  end
+
   private
 
   def game_params
