@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   # before_action :authenticate_user!
 
   def show
-    @game = Game.find(params[:id])
+    @game = Game.where(id: params[:id]).last
   end
 
   def new
@@ -19,7 +19,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = Game.find(params[:id])
+    @game = Game.where(id: params[:id]).last
     @game.update_attributes(game_params)
     redirect_to game_path(@game)
   end
