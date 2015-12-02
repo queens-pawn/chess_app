@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 FactoryGirl.define do
 
   factory :game do
@@ -8,12 +7,3 @@ FactoryGirl.define do
   end
 
 end
-=======
-FactoryGirl.define do 
-
-  factory :game do
-    name "testGame"
-  end
-  
-end
->>>>>>> master
