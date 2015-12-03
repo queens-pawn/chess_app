@@ -2,15 +2,19 @@
 <div class="col-xs-10 col-xs-offset-1">
 	<h1><%= @game.name %></h1>
 	<div class="chessboard">
-		<% 4.times do |alternate_rows| %>
+		<% 4.times do |y_coordinate| %>
 		<div class="row">
-			<% 4.times do |alternate_squares| %>
-				<div class="white"></div>
+			<% 4.times do |x_coordinate| %>
+				<div class="white">
+					<%= image_tag @game.pieces.where(x_position: x_coordinate, y_position: y_coordinate).first.to_my_image_path %>
+				</div>
 				<div class="black"></div>
+				<!-- x_coordinate += 1
+				@game.pieces.where(x_position: x_coordinate, y_position: y_coordinate).first -->
 			<% end %>
 		</div>
 		<div class="row">
-			<% 4.times do |alternate_squares| %>
+			<% 4.times do |x_coordinate| %>
 				<div class="black"></div>
 				<div class="white"></div>
 			<% end %>
