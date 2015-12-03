@@ -6,7 +6,7 @@
 		<div class="row">
 			<% 4.times do |x_coordinate| %>
 				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: x_coordinate, y_position: y_coordinate).first.to_my_image_path %>
+					<%= image_tag @game.pieces.where(x_position: 0, y_position: 0).first.to_my_image_path %>
 				</div>
 				<div class="black"></div>
 				<!-- x_coordinate += 1
