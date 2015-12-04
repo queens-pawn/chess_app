@@ -3,93 +3,29 @@
 	<h1><%= @game.name %></h1>
 	<div class="chessboard">
 
-		<% 4.times do |y_coordinate| %>
-		<!-- x_coordinate = 0
-		y_coordinate = 0 -->
+		<% 8.times do |row_coordinate| %>
+
 		<div class="row">
 
-			<% 4.times do |x_coordinate| %>
+			<% 8.times do |column_coordinate| %>
 
 				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 0).first.to_my_image_path %>
+					<!-- <%= row_coordinate %>,<%= column_coordinate %> -->
+
+					<% if @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first %>
+							<%= image_tag @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first.to_my_image_path %>
+					<% end %>
+
 
 				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 1).first.to_my_image_path %>
 
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 2).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 3).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 4).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 5).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 6).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 0, y_position: 7).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 0).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 1).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 2).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 3).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 4).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 5).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 6).first.to_my_image_path %>
-
-				</div>
-				<div class="white">
-					<%= image_tag @game.pieces.where(x_position: 1, y_position: 7).first.to_my_image_path %>
-
-				</div>
-				<!-- headsup -->
-				<div class="black">
-
-				</div>
-				<!-- x_coordinate += 1
-				@game.pieces.where(x_position: x_coordinate, y_position: y_coordinate).first.to_my_image_path -->
+				<!-- @game.pieces.where(x_position: x_coordinate, y_position: y_coordinate).first.to_my_image_path -->
 			<% end %>
 
 		</div>
 
-		<div class="row">
-			<% 4.times do |x_coordinate| %>
-				<div class="black"></div>
-				<div class="white"></div>
-			<% end %>
-		</div>
+
+
 		<% end %>
-	</div>
+	</div><!-- chessboard end -->
 </div>
