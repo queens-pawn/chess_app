@@ -9,13 +9,12 @@
 
 			<% 8.times do |column_coordinate| %>
 
-				<div class="white">
-					<!-- <%= row_coordinate %>,<%= column_coordinate %> -->
+				<div class="<%= cycle("white", "black") -%>">
 
 					<% if @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first %>
 							<%= image_tag @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first.to_my_image_path %>
 					<% end %>
-
+					<% reset_cycle() %>
 				</div>
 
 			<% end %>
