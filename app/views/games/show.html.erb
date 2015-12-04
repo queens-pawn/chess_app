@@ -16,10 +16,8 @@
 							<%= image_tag @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first.to_my_image_path %>
 					<% end %>
 
-
 				</div>
 
-				<!-- @game.pieces.where(x_position: x_coordinate, y_position: y_coordinate).first.to_my_image_path -->
 			<% end %>
 
 		</div>
