@@ -1,6 +1,7 @@
 <br>
 <div class="col-xs-10 col-xs-offset-1">
 	<h1><%= @game.name %></h1>
+
 	<div class="chessboard">
 
 		<% 8.times do |row_coordinate| %>
@@ -9,20 +10,19 @@
 
 			<% 8.times do |column_coordinate| %>
 
-				<div class="<%= cycle("white", "black") -%>">
+				<div class="<%= cycle("white", "black", "white", "black", "white", "black", "white", "black", "black", "white", "black", "white", "black", "white", "black", "white") -%>">
 
 					<% if @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first %>
 							<%= image_tag @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first.to_my_image_path %>
 					<% end %>
-					<% reset_cycle() %>
+
 				</div>
 
 			<% end %>
 
 		</div>
 
-
-
 		<% end %>
+
 	</div><!-- chessboard end -->
-</div>
+</div><!-- bootstrap grid css end -->
