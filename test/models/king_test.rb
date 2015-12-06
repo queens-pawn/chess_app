@@ -6,28 +6,28 @@ class KingTest < ActiveSupport::TestCase
 
     assert(
       king.valid_move?(5, 4)
-     ) 
+    ) 
     assert(
       king.valid_move?(4, 5)
-     )
+    )
       assert(
       king.valid_move?(3, 4)
-     ) 
+    ) 
       assert(
       king.valid_move?(4, 3)
-     ) 
+    ) 
       assert(
       king.valid_move?(5, 5)
-     ) 
+    ) 
       assert(
       king.valid_move?(3, 5)
-     ) 
+    ) 
       assert(
       king.valid_move?(3, 3)
-     ) 
+    ) 
       assert(
       king.valid_move?(5, 3)
-     ) 
+    ) 
   end
 
   def test_not_valid_move?
@@ -35,25 +35,25 @@ class KingTest < ActiveSupport::TestCase
 
     assert ! (
       king.valid_move?(4, -1)
-     ) 
+    ) 
     assert ! (
       king.valid_move?(3, 3)
-     )
+    )
     assert ! (
       king.valid_move?(5, 3)
-     ) 
+    ) 
     assert ! (
       king.valid_move?(4, 2)
-     )  
+    )  
     assert ! (
       king.valid_move?(6, 0)
-     )
+    )
     assert ! (
       king.valid_move?(2, 0)
-     )
+    )
     assert ! (
       king.valid_move?(6, 0)
-     )         
+    )         
   end
-  
+
 end
