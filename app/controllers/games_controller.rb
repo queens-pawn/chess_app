@@ -2,7 +2,6 @@ class GamesController < ApplicationController
   # before_action :authenticate_user!
 
   def show
-    @game = Game.where(id: params[:id]).last
   end
 
   def new
@@ -19,14 +18,16 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = Game.where(id: params[:id]).last
-    @game.update_attributes(game_params)
+    current_game.update_attributes(game_params)
     redirect_to game_path(@game)
   end
 
-
-
   private
+
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.where(id: params[:id]).last
+  end
 
   def game_params
     params.require(:game).permit(:name, :white_player_id, :black_player_id)
