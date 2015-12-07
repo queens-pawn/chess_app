@@ -5,6 +5,9 @@ class PiecesController < ApplicationController
     @piece.game.pieces
   end
 
+
+
+
   private
 
   def piece_params

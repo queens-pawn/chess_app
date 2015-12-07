@@ -24,9 +24,7 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
-  def piece_show
-    @game.piece_at(x_cord, y_cord)
-  end
+
 
   private
 

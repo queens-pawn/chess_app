@@ -10,16 +10,21 @@
 
 			<% 8.times do |column_coordinate| %>
 
-				<div align="center" class="<%= cycle("white", "black", "white", "black", "white", "black", "white", "black", "black", "white", "black", "white", "black", "white", "black", "white") -%>">
-
-					<% if @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first %>
-							<%= image_tag @game.pieces.where(x_position: column_coordinate, y_position: row_coordinate).first.to_my_image_path %>
+			<% if row_coordinate.even? %>
+        <div class="<%= cycle("white even", "black even") %>">
+      <% else %>
+        <div class="<%= cycle("black odd", "white odd") %>">
+      <% end %>
+					<!-- piece_at method in the pieces model -->
+					<% if @game.piece_at(column_coordinate, row_coordinate) %>
+							<%= image_tag @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>
 					<% end %>
+
 				</div>
 
 			<% end %>
 
-		</div>
+				</div>
 
 		<% end %>
 

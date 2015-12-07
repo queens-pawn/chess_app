@@ -33,4 +33,10 @@ class Game < ActiveRecord::Base
     Piece.create(:type => 'King', :color => 'black', :game_id => id, :x_position => 4, :y_position => 7)
     Piece.create(:type => 'Queen', :color => 'black', :game_id => id, :x_position => 3, :y_position => 7)
   end
+
+  # calling this in show.html.erb
+  def piece_at(column_coordinate, row_coordinate)
+    pieces.where(x_position: column_coordinate, y_position: row_coordinate).first
+  end
+
 end
