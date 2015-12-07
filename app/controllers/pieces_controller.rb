@@ -1,11 +1,14 @@
 class PiecesController < ApplicationController
 
-  def show
-    @game = current_piece.game
-    @pieces = current_piece.game.pieces
-  end
+  # def show
+  #   @game = current_piece.game
+  #   @pieces = current_piece.game.pieces
+  # end
 
   def update
+    @game = current_piece.game
+    @pieces = current_piece.game.pieces
+
     x = params[:x_position]
     y = params[:y_position]
     current_piece.update_attributes(:x_position => x, :y_position => y)

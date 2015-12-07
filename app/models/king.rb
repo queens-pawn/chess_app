@@ -19,7 +19,7 @@ class King < Piece
 
   def valid_move?(new_x_position, new_y_position)
     new_position = [new_x_position, new_y_position]
-    possible_moves(x_position, y_position).include? new_position 
+    possible_moves(x_position, y_position).include? new_position
   end
 
 end
