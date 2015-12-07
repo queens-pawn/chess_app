@@ -24,6 +24,8 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
+
+
   private
 
   def game_params

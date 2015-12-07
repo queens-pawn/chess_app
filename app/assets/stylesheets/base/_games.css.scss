@@ -3,12 +3,14 @@
   height: 650px;
   border: 5px solid #663300;
 }
+
 .black {
   float: left;
   width: 80px;
   height: 80px;
   background-color: black;
 }
+
 .white {
   float: left;
   width: 80px;
@@ -19,10 +21,17 @@
 .row {
   margin-left: 0px;
   margin-right: 0px;
+  text-align: center;
 }
 
 .rows:after {
   content: "";
   display: table;
   clear: both;
+}
+
+.row img {
+  width: auto;
+  height: 100%;
+  vertical-align: middle;
 }

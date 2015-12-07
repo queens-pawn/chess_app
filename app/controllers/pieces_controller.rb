@@ -14,6 +14,9 @@ class PiecesController < ApplicationController
     redirect_to game_path
   end
 
+
+
+
   private
 
   helper_method :current_piece
