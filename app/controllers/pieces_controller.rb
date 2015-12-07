@@ -7,7 +7,6 @@ class PiecesController < ApplicationController
 
   def update
     @game = current_piece.game
-    @pieces = current_piece.game.pieces
 
     x = params[:x_position]
     y = params[:y_position]
@@ -23,6 +22,6 @@ class PiecesController < ApplicationController
   end
 
   def piece_params
-    params.require(:piece).permit(:type, :color, :game_id, :x_position, :y_position)
+    params.require(:piece).permit(:x_position, :y_position)
   end
 end
