@@ -1,10 +1,5 @@
 class PiecesController < ApplicationController
 
-  # def show
-  #   @game = current_piece.game
-  #   @pieces = current_piece.game.pieces
-  # end
-
   def update
     @game = current_piece.game
 
