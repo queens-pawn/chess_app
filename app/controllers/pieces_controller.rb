@@ -2,10 +2,7 @@ class PiecesController < ApplicationController
 
   def update
     @game = current_piece.game
-
-    x = params[:x_position]
-    y = params[:y_position]
-    current_piece.update_attributes(:x_position => x, :y_position => y)
+    current_piece.update_attributes(piece_params)
     redirect_to game_path
   end
 
@@ -17,6 +14,6 @@ class PiecesController < ApplicationController
   end
 
   def piece_params
-    params.require(:piece).permit(:x_position, :y_position)
+    params.require(:piece).permit(:type, :x_position, :y_position)
   end
 end

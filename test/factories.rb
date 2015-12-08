@@ -8,7 +8,7 @@ FactoryGirl.define do
 
   factory :piece do
     type 'Pawn'
-    color 'white'
+    color 'black'
     x_position 1
     y_position 1
     game
