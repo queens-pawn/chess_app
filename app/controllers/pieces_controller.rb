@@ -3,7 +3,7 @@ class PiecesController < ApplicationController
   def update
     @game = current_piece.game
     current_piece.update_attributes(piece_params)
-    redirect_to game_path
+    redirect_to game_path(@game)
   end
 
   private
