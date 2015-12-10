@@ -11,8 +11,10 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(new_x, new_y)
+    move_to_position = [x_position: new_x, y_position: new_y]
 
-    if piece exists at new_x, new_y
+    # if the move_to_position is NOT empty...
+    if !move_to_position.empty?
       if current_piece.color == other_piece.color
         return an error message -- not valid move
       else
