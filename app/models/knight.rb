@@ -1,5 +1,5 @@
 class Knight < Piece
-
+  #make sure doesnt include is_obstructed method when added to piece as can jump over pieces.
 	def valid_move?(x_destination, y_destination)
 		#check whether out of bounds
 		return false if out_of_bounds?(x_destination, y_destination)
@@ -18,7 +18,7 @@ class Knight < Piece
 
 	#check to see if move is of correct length
 	def correct_length?(x_destination, y_destination)
-		(x_position - x_destination) + (y_position - y_destination) == 3
+		(x_position - x_destination).abs + (y_position - y_destination).abs == 3
 	end
 
   def to_my_image_path
