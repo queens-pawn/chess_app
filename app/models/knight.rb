@@ -5,7 +5,9 @@ class Knight < Piece
 		unless super(x, y)
 			return false
 		end
-		#make sure the length of move is correct
+		if x_position - x == 0 || y_position - y == 0
+      return false
+    end
 		(x_position - x).abs + (y_position - y).abs == 3
 	end
 
