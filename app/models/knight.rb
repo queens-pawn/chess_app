@@ -1,6 +1,7 @@
 class Knight < Piece
   #make sure doesnt include is_obstructed method when added to piece as can jump over pieces.
   def valid_move?(x, y)
+    #check whether out of bounds
     unless super(x, y)
       return false
     end
