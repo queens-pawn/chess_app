@@ -117,11 +117,6 @@ class PieceTest < ActiveSupport::TestCase
 
   test "is_obstructed_invalid?" do
   	piece = Piece.create(:type => 'King', :color => 'white', :game_id => 1, :x_position => 4, :y_position => 4)
-  	pawn = Piece.create(:type => 'Pawn', :color => 'white', :game_id => 1, :x_position => 5, :y_position => 4)
-  	expected = true
-  	actual = piece.is_obstructed?(2, 5)
-  	#assert_equal("Invalid input. Not diagonal, horizontal or vertical.", exception.message)
-  	#assert_equal expected, actual
-  	assert_raise(RuntimeError) { raise("Invalid input. Not diagonal, horizontal or vertical.") }
+  	assert_raise(RuntimeError) { piece.is_obstructed?(2,5) }
   end
 end
