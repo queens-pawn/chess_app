@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PieceTest < ActiveSupport::TestCase
+
   test '#move_to! with valid move and no piece exists' do
     piece = FactoryGirl.create(:piece)
 
@@ -34,6 +35,26 @@ class PieceTest < ActiveSupport::TestCase
     assert Piece.find_by(id: other_rook.id), "Removed same colored piece"
     assert my_rook.x_position == 0, "expected x position to be 0"
     assert my_rook.y_position == 3, "expected y position to be 3"
+  end
+
+  def setup
+    @piece = FactoryGirl.create(:piece)
+  end
+
+  test 'piece valid move' do
+    assert_equal true, @piece.valid_move?(1, 2)
+  end
+
+  test 'piece x off board' do
+    assert_equal false, @piece.valid_move?(-1, 7)
+  end
+
+  test 'piece y off board' do
+    assert_equal false, @piece.valid_move?(5, -3)
+  end
+
+  test 'both piece off board' do
+    assert_equal false, @piece.valid_move?(-3, -4)
   end
 
 end

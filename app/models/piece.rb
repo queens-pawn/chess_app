@@ -24,6 +24,15 @@ class Piece < ActiveRecord::Base
 
   end
 
+  def valid_move?(x, y)
+    if x < 0 || x > 7
+      return false
+    elsif y < 0 || y > 7
+      return false
+    end
+    return true
+  end
+
   private
 
   def successful_move!(x_position: nil, y_position: nil)
