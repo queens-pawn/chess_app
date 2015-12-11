@@ -119,4 +119,25 @@ class PieceTest < ActiveSupport::TestCase
   	piece = Piece.create(:type => 'King', :color => 'white', :game_id => 1, :x_position => 4, :y_position => 4)
   	assert_raise(RuntimeError) { piece.is_obstructed?(2,5) }
   end
+
+  test 'piece valid move' do
+    piece = FactoryGirl.create(:piece)
+    assert_equal true, piece.valid_move?(1, 2)
+  end
+
+  test 'piece x off board' do
+    piece = FactoryGirl.create(:piece)
+    assert_equal false, piece.valid_move?(-1, 7)
+  end
+
+  test 'piece y off board' do
+    piece = FactoryGirl.create(:piece)
+    assert_equal false, piece.valid_move?(5, -3)
+  end
+
+  test 'both piece off board' do
+    piece = FactoryGirl.create(:piece)
+    assert_equal false, piece.valid_move?(-3, -4)
+  end
 end
+

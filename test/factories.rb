@@ -6,4 +6,12 @@ FactoryGirl.define do
     black_player_id 1
   end
 
+  factory :piece do
+    type 'Pawn'
+    color 'black'
+    x_position 1
+    y_position 1
+    game
+  end
+
 end

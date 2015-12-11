@@ -13,7 +13,8 @@ ChessApp::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  # config.serve_static_assets  = true (This has changed in new Rails)
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
@@ -32,5 +33,8 @@ ChessApp::Application.configure do
   config.action_mailer.delivery_method = :test
 
   # Print deprecation notices to the stderr.
-  config.active_support.deprecation = :stderr
+  # config.active_support.deprecation = :stderr (Will be deprecated for future rails)
+  Rails.application.configure do
+    config.active_support.test_order = :sorted
+  end
 end

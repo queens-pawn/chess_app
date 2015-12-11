@@ -68,6 +68,15 @@ class Piece < ActiveRecord::Base
     return horizontal_obstruction?(x_destination, y_destination) if is_horizontal?(x_destination, y_destination)
     raise 'Invalid input. Not diagonal, horizontal or vertical.'
   end
+
+  def valid_move?(x, y)
+    if x < 0 || x > 7
+      return false
+    elsif y < 0 || y > 7
+      return false
+    end
+    return true
+  end
 end
 
  
