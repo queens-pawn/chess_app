@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PieceTest < ActiveSupport::TestCase
 
+  # CAPTURE LOGIC TESTS
   test '#move_to! with valid move and no piece exists' do
     piece = FactoryGirl.create(:piece)
 
@@ -37,6 +38,7 @@ class PieceTest < ActiveSupport::TestCase
     assert my_rook.y_position == 3, "expected y position to be 3"
   end
 
+  # VALID MOVE TESTS
   def setup
     @piece = FactoryGirl.create(:piece)
   end
