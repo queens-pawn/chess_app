@@ -36,4 +36,12 @@ class KnightTest < ActiveSupport::TestCase
   test "Knight y position off board" do
     assert_equal false, @knight.valid_move?(0, -1)
   end
+  
+  test "Knight both position off board" do
+    assert_equal false, @knight.valid_move?(-1, -1)
+  end
+
+  test "Knight move 3 to right" do
+    assert_equal false, @knight.valid_move?(4, 1)
+  end
 end
