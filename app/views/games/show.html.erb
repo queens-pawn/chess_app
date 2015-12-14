@@ -4,16 +4,16 @@
 
 	<div class="chessboard">
 
-		<% 8.times do |row_coordinate| %>
+		<% 7.downto(0) do |row_coordinate| %>
 
 		<div class="row">
 
-			<% 8.times do |column_coordinate| %>
+			<% 0.upto(7) do |column_coordinate| %>
 
 			<% if row_coordinate.even? %>
-        <div class="<%= cycle("black even", "white even") %>">
+        <div class="<%= cycle("white even", "black even") %>">
       <% else %>
-        <div class="<%= cycle("white odd", "black odd") %>">
+        <div class="<%= cycle("black odd", "white odd") %>">
       <% end %>
 					<!-- piece_at method in the pieces model -->
 					<% if @game.piece_at(column_coordinate, row_coordinate) %>
