@@ -11,9 +11,9 @@
 			<% 8.times do |column_coordinate| %>
 
 			<% if row_coordinate.even? %>
-        <div class="<%= cycle("white even", "black even") %>">
+        <div class="<%= cycle("black even", "white even") %>">
       <% else %>
-        <div class="<%= cycle("black odd", "white odd") %>">
+        <div class="<%= cycle("white odd", "black odd") %>">
       <% end %>
 					<!-- piece_at method in the pieces model -->
 					<% if @game.piece_at(column_coordinate, row_coordinate) %>
