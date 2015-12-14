@@ -22,20 +22,12 @@ class Piece < ActiveRecord::Base
   	x_destination - x_position == y_destination - y_position
   end
 
-  # .models/game.rb
-  #retrieves a piece given a coordinates: if there is no piece on given coords, it returns `nil`
-  #def piece_at(column_coordinate, row_coordinate)
-  #  pieces.where(x_position: column_coordinate, y_position: row_coordinate).first
-  #end
-
   def vertical_obstruction?(x_destination, y_destination)
   	is_obstructed = false
   	((self.y_position + 1)..y_destination).each do |y|
-	  	# get a game piece with same game_id as current piece at (x, y) coordinate
-	  	piece = Piece.where("game_id = ? AND x_position = ? AND y_position = ?" , game_id , x_destination, y)
-	  	#return true if there is a piece and false if there isn't
-	  	is_obstructed = piece.any?
-	  	break if is_obstructed 
+	  	piece = Piece.where("game_id = ? AND x_position = ? AND y_position = ?", game_id, x_destination, y)
+      is_obstructed = piece.any?
+	  	break if is_obstructed
 		end
 		is_obstructed
   end
