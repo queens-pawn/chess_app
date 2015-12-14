@@ -13,10 +13,10 @@ class RookTest < ActiveSupport::TestCase
 
   def test_invalid_vertical_move?
     rook = Rook.new(x_position: 7, y_position: 7)
-    assert ! (
+    assert_not (
       rook.valid_move?(6, 6)
     )
-    assert ! (
+    assert_not (
       rook.valid_move?(5, 6)
     )
   end
@@ -33,26 +33,26 @@ class RookTest < ActiveSupport::TestCase
 
   def test_invalid_horizontal_move?
     rook = Rook.new(x_position: 0, y_position: 7)
-    assert ! (
+    assert_not (
       rook.valid_move?(7, 6)
     )
-    assert ! (
+    assert_not (
       rook.valid_move?(1, 6)
     )
   end
 
   def test_rook_off_the_board?
     rook = Rook.new(x_position: 7, y_position: 0)
-    assert ! (
+    assert_not (
       rook.valid_move?(8, 0)
     )
-    assert ! (
+    assert_not (
       rook.valid_move?(7, 8)
     )
-    assert ! (
+    assert_not (
       rook.valid_move?(-1, 0)
     )
-    assert ! (
+    assert_not (
       rook.valid_move?(7, -1)
     )
   end
