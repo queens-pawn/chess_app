@@ -4,6 +4,7 @@ class PawnTest < ActiveSupport::TestCase
   def setup
     @first_white_pawn = Pawn.create(color: 'white', x_position: 3, y_position: 6)
     @second_white_pawn = Pawn.create(color: 'white', x_position: 5, y_position: 5)
+    # @white_rook = Rook.create(color: 'white', x_position: 3, y_position: 3)
     @first_black_pawn = Pawn.create(color: 'black', x_position: 0, y_position: 1)
     @second_black_pawn = Pawn.create(color: 'black', x_position: 2, y_position: 2)
   end
@@ -47,5 +48,14 @@ class PawnTest < ActiveSupport::TestCase
 
   test "After black first move, 1 space foward" do
     assert_equal true, @second_black_pawn.valid_move?(2, 3)
+  end
+
+  test "Black right diagonal move to capture white" do
+    @piece = FactoryGirl.create(:piece, x_position: 3, y_position: 3)
+    assert_equal true, @second_black_pawn.valid_move?(3, 3)
+  end
+
+  test "Black left diagonal move to capture white" do
+    assert_equal true, @second_black_pawn.valid_move?(1, 3)
   end
 end

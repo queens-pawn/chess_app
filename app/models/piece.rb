@@ -21,7 +21,6 @@ class Piece < ActiveRecord::Base
     else
       successful_move!(x_position: x_position, y_position: y_position)
     end
-
   end
 
   def valid_move?(x, y)
@@ -31,10 +30,6 @@ class Piece < ActiveRecord::Base
       return false
     end
     return true
-  end
-
-  def obstructed(x, y)
-    game.pieces.where(x_position: x, y_position: y).any?
   end
 
   private
