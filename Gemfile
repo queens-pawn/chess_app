@@ -42,8 +42,11 @@ gem 'simple_form'
 # Include Devise version ‘>= 3.2.4’ to prevent Heroku issues
 gem 'devise', '>= 3.2.4'
 
-# Include factory girl
-gem 'factory_girl_rails', '~> 4.0'
+# Include factory girl and shoulda-contest for testing
+group :test do
+  gem 'shoulda-context'
+  gem 'factory_girl_rails', '~> 4.0'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
