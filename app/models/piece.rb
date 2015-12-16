@@ -12,7 +12,6 @@ class Piece < ActiveRecord::Base
 
   def move_to!(x_position: nil, y_position: nil)
     another_piece = self.game.piece_at(x_position, y_position)
-
     if another_piece #exists...
       if another_piece.color != self.color #check if same color
         another_piece.destroy
@@ -21,7 +20,6 @@ class Piece < ActiveRecord::Base
     else
       successful_move!(x_position: x_position, y_position: y_position)
     end
-
   end
 
   def valid_move?(x, y)
