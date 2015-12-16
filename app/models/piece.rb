@@ -33,6 +33,10 @@ class Piece < ActiveRecord::Base
     return true
   end
 
+  def obstructed(x, y)
+    game.pieces.where(x_position: x, y_position: y).any?
+  end
+
   private
 
   def successful_move!(x_position: nil, y_position: nil)

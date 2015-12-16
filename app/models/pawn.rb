@@ -4,6 +4,7 @@ class Pawn < Piece
     unless super(x, y)
       return false
     end
+
     if color == 'white'
       if y_position == 6
         (x_position - x == 0 && y_position - y == 1) || (x_position - x == 0 && y_position - y == 2)
