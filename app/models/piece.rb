@@ -35,7 +35,7 @@ class Piece < ActiveRecord::Base
   private
 
   def successful_move!(x_position: nil, y_position: nil)
-    self.update(x_position: x_position, y_position: y_position)
+    self.update(x_position: x_position, y_position: y_position, has_moved: true)
     :success
   end
 
