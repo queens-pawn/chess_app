@@ -4,23 +4,25 @@ class Pawn < Piece
     unless super(x, y)
       return false
     end
+    x_distance = x_position - x
+    y_distance = y_position - y
     if occupied?(x, y)
       if color == 'white'
-        (x_position - x).abs == 1 && y_position - y == 1
+        x_distance.abs == 1 && y_distance == 1
       else
-        (x - x_position).abs == 1 && y - y_position == 1
+        (-x_distance).abs == 1 && -y_distance == 1
       end
     elsif color == 'white'
       unless has_moved
-        (x_position - x == 0 && y_position - y == 1) || (x_position - x == 0 && y_position - y == 2)
+        (x_distance == 0 && y_distance == 1) || (x_distance == 0 && y_distance == 2)
       else
-        x_position - x == 0 && y_position - y == 1
+        x_distance == 0 && y_distance == 1
       end
     else
       unless has_moved
-        (x - x_position == 0 && y - y_position == 1) || (x - x_position == 0 && y - y_position == 2)
+        (-x_distance == 0 && -y_distance == 1) || (-x_distance == 0 && -y_distance == 2)
       else
-        x - x_position == 0 && y - y_position == 1
+        -x_distance == 0 && -y_distance == 1
       end
     end
   end
