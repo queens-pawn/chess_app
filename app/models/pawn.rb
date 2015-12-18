@@ -31,6 +31,7 @@ class Pawn < Piece
     unless game.piece_at(x, y)
       return false
     end
+    return false if game.piece_at(x, y).color == color
     return true
   end
 
