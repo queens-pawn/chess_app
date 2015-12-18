@@ -2,10 +2,10 @@ class PiecesController < ApplicationController
 
   def update
     @game = current_piece.game
-    if current_piece.valid_move?(x_position: piece_params[:x_position], y_position: piece_params[:y_position])
+    if current_piece.valid_move?(piece_params[:x_position].to_i, piece_params[:y_position].to_i)
       current_piece.move_to!(x_position: piece_params[:x_position], y_position: piece_params[:y_position])
-      redirect_to game_path(@game)
     end
+    redirect_to game_path(@game)
   end
 
   private
