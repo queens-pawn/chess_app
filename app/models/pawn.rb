@@ -10,19 +10,19 @@ class Pawn < Piece
       if color == 'white'
         x_distance.abs == 1 && y_distance == 1
       else
-        (-x_distance).abs == 1 && -y_distance == 1
+        (x_distance).abs == 1 && -y_distance == 1
       end
     elsif color == 'white'
-      unless has_moved
+      if ! has_moved
         (x_distance == 0 && y_distance == 1) || (x_distance == 0 && y_distance == 2)
       else
         x_distance == 0 && y_distance == 1
       end
     else
-      unless has_moved
-        (-x_distance == 0 && -y_distance == 1) || (-x_distance == 0 && -y_distance == 2)
+      if ! has_moved
+        (x_distance == 0 && -y_distance == 1) || (x_distance == 0 && -y_distance == 2)
       else
-        -x_distance == 0 && -y_distance == 1
+        x_distance == 0 && -y_distance == 1
       end
     end
   end

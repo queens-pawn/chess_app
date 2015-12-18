@@ -3,7 +3,6 @@ require 'test_helper'
 class PawnTest < ActiveSupport::TestCase
   def setup
     @game = Game.new
-    @game.populate_board!
     @first_white_pawn = Pawn.create(game: @game, color: 'white', x_position: 3, y_position: 6)
     @second_white_pawn = Pawn.create(game: @game, color: 'white', x_position: 5, y_position: 5)
     @first_black_pawn = Pawn.create(game: @game, color: 'black', x_position: 0, y_position: 1)
