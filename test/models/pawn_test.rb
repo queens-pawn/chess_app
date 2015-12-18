@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class PawnTest < ActiveSupport::TestCase
-<<<<<<< HEAD
-=======
   def setup
     @game = Game.new
     @game.populate_board!
@@ -101,5 +99,4 @@ class PawnTest < ActiveSupport::TestCase
     pawn = Pawn.create(game: @game, color: 'black', x_position: 3, y_position: 3)
     assert_equal false, @second_black_pawn.valid_move?(3, 3)
   end
->>>>>>> new_branch_name
 end
