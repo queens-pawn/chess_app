@@ -24,10 +24,11 @@ class Piece < ActiveRecord::Base
 
   def vertical_obstruction?(x_destination, y_destination)
   	is_obstructed = false
-  	((self.y_position + 1)..y_destination).each do |y|
-	  	piece = Piece.where("game_id = ? AND x_position = ? AND y_position = ?", game_id, x_destination, y)
-      is_obstructed = piece.any?
-	  	break if is_obstructed
+    ((self.y_position + 1)..y_destination).each do |y|
+      if game.piece_at(x_destination, y)
+        is_obstructed = true
+	  	  break
+      end
 		end
 		is_obstructed
   end
@@ -35,9 +36,10 @@ class Piece < ActiveRecord::Base
   def horizontal_obstruction?(x_destination, y_destination)
   	is_obstructed = false
   	((self.x_position + 1)..x_destination).each do |x|
-  		piece = Piece.where("game_id = ? AND x_position = ? AND y_position = ?", game_id, x, y_destination)
-  		is_obstructed = piece.any?
-  		break if is_obstructed
+  		if game.piece_at(x, y_destination)
+    		is_obstructed = true
+    		break
+      end
   	end
   	is_obstructed
   end
@@ -46,9 +48,10 @@ class Piece < ActiveRecord::Base
   	is_obstructed = false
   	y_pos = (self.y_position + 1)
   	((self.x_position + 1)..x_destination).each do |x|
-  		piece = Piece.where("game_id = ? AND x_position = ? AND y_position = ?", game_id, x, y_pos)
-  		is_obstructed = piece.any?
-  		break if is_obstructed
+  		if game.piece_at(x, y_pos)
+    		is_obstructed = true
+    		break
+      end
   		y_pos += 1
   	end
   	is_obstructed
