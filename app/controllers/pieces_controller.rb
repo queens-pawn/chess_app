@@ -3,7 +3,8 @@ class PiecesController < ApplicationController
   def update
     @game = current_piece.game
     current_piece.move_to!(x_position: piece_params[:x_position], y_position: piece_params[:y_position])
-    redirect_to game_path(@game)
+    # redirect_to game_path(@game)
+    render :text => 'updated!'
   end
 
   private

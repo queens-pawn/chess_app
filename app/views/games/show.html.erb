@@ -1,3 +1,30 @@
+<script>
+  $(function(){
+    $('.chessboard .row img').draggable({
+      containment: '.chessboard',
+      cursor: 'move',
+      revert: 'invalid'
+    });
+    $('.chessboard .row div').droppable({
+      drop: function( event, ui ) {
+        var dropped = ui.draggable;
+        var droppedOn = $(this);
+        $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn);
+        var x = droppedOn.index();
+        var y = droppedOn.parent('div').attr('id');
+        $.ajax({
+          type: 'PUT',
+          url: dropped.data('update-url'),
+          dataType: 'json',
+          data: {piece: {x_position: x, y_position: y}}
+        });
+        console.log("x_coord: " + x + " y_coord: " + y );  
+      }
+    });
+    // $('.chessboard div').not('div:empty').droppable('disable');
+  });//close ready 
+</script>
+
 <br>
 <div class="col-xs-10 col-xs-offset-1">
 	<h1><%= @game.name %></h1>
@@ -6,7 +33,7 @@
 
 		<% 8.times do |row_coordinate| %>
 
-		<div class="row">
+		<div id="<%= row_coordinate %>" class="row">
 
 			<% 8.times do |column_coordinate| %>
 
@@ -17,7 +44,7 @@
       <% end %>
 					<!-- piece_at method in the pieces model -->
 					<% if @game.piece_at(column_coordinate, row_coordinate) %>
-							<%= image_tag @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>
+						 <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
 					<% end %>
 
 				</div>
