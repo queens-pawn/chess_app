@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  after_create :populate_board!
+  #after_create :populate_board!
 
   def populate_board!
     (0..7).each do |y|
