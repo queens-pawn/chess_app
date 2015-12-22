@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PiecesControllerTest < ActionController::TestCase
+
   test "should get update" do
     piece = FactoryGirl.create(:piece)
     put :update, :id => piece.id, :piece => { :x_position => 1, :y_position => 2 }
@@ -10,4 +11,6 @@ class PiecesControllerTest < ActionController::TestCase
     assert_response :found
     assert_redirected_to game_path(piece.game)
   end
+
+
 end

@@ -63,6 +63,17 @@ class Piece < ActiveRecord::Base
     return horizontal_obstruction?(x_destination, y_destination) if is_horizontal?(x_destination, y_destination)
     raise 'Invalid input. Not diagonal, horizontal or vertical.'
   end
+  def move_to!(x_position: nil, y_position: nil)
+    another_piece = self.game.piece_at(x_position, y_position)
+    if another_piece #exists...
+      if another_piece.color != self.color #check if same color
+        another_piece.destroy
+        successful_move!(x_position: x_position, y_position: y_position)
+      end
+    else
+      successful_move!(x_position: x_position, y_position: y_position)
+    end
+  end
 
   def valid_move?(x, y)
     if x < 0 || x > 7
@@ -72,6 +83,14 @@ class Piece < ActiveRecord::Base
     end
     return true
   end
+
+  private
+
+  def successful_move!(x_position: nil, y_position: nil)
+    self.update(x_position: x_position, y_position: y_position)
+    :success
+  end
+
 end
 
  

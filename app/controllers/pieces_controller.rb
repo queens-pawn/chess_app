@@ -2,7 +2,7 @@ class PiecesController < ApplicationController
 
   def update
     @game = current_piece.game
-    current_piece.update_attributes(piece_params)
+    current_piece.move_to!(x_position: piece_params[:x_position], y_position: piece_params[:y_position])
     redirect_to game_path(@game)
   end
 
