@@ -18,10 +18,10 @@
           dataType: 'json',
           data: {piece: {x_position: x, y_position: y}}
         });
-        console.log("x_coord: " + x + " y_coord: " + y );  
       }
     });
-    // $('.chessboard div').not('div:empty').droppable('disable');
+    // disabling droppable on squares with a piece not yet working...
+    // $('div div').not('div:empty').droppable('disable');
   });//close ready 
 </script>
 
@@ -32,8 +32,7 @@
 	<div class="chessboard">
 
 		<% 8.times do |row_coordinate| %>
-
-		<div id="<%= row_coordinate %>" class="row">
+		<div class="row" id="<%= row_coordinate %>">
 
 			<% 8.times do |column_coordinate| %>
 
@@ -46,14 +45,11 @@
 					<% if @game.piece_at(column_coordinate, row_coordinate) %>
 						 <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
 					<% end %>
-
 				</div>
-
 			<% end %>
 
-				</div>
-
+			 </div>
 		<% end %>
-
 	</div><!-- chessboard end -->
 </div><!-- bootstrap grid css end -->
+
