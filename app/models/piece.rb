@@ -16,6 +16,8 @@ class Piece < ActiveRecord::Base
       if another_piece.color != self.color #check if same color
         another_piece.destroy
         successful_move!(x_position: x_position, y_position: y_position)
+      else
+        return false
       end
     else
       successful_move!(x_position: x_position, y_position: y_position)
@@ -34,7 +36,7 @@ class Piece < ActiveRecord::Base
   private
 
   def successful_move!(x_position: nil, y_position: nil)
-    self.update(x_position: x_position, y_position: y_position)
+    self.update(x_position: x_position, y_position: y_position, has_moved: true)
     :success
   end
 

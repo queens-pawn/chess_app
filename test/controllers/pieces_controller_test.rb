@@ -11,6 +11,4 @@ class PiecesControllerTest < ActionController::TestCase
     assert_response :found
     assert_redirected_to game_path(piece.game)
   end
-
-
 end
