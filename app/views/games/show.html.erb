@@ -1,25 +1,25 @@
 <script>
-$(function(){
-  $('.chessboard .row img').draggable({
-    containment: '.chessboard',
-    cursor: 'move',
-    revert: 'invalid'
-  });
-  $('.chessboard .row div').droppable({
-    drop: function( event, ui ) {
-      var dropped = ui.draggable;
-      var droppedOn = $(this);
-      $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn);
-      var x = droppedOn.index();
-      var y = droppedOn.parent('div').attr('id');
-      $.ajax({
-        type: 'PUT',
-        url: dropped.data('update-url'),
-        dataType: 'json',
-        data: {piece: {x_position: x, y_position: y}}
-      });
-    }
-  });
+  $(function(){
+    $('.chessboard .row img').draggable({
+      containment: '.chessboard',
+      cursor: 'move',
+      revert: 'invalid'
+    });
+    $('.chessboard .row div').droppable({
+      drop: function( event, ui ) {
+        var dropped = ui.draggable;
+        var droppedOn = $(this);
+        $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn);
+        var x = droppedOn.index();
+        var y = droppedOn.parent('div').attr('id');
+        $.ajax({
+          type: 'PUT',
+          url: dropped.data('update-url'),
+          dataType: 'json',
+          data: {piece: {x_position: x, y_position: y}}
+        });
+      }
+    });
     // disabling droppable on squares with a piece not yet working...
     // $('div div').not('div:empty').droppable('disable');
   });//close ready 
@@ -31,8 +31,8 @@ $(function(){
 	<h1><%= @game.name %></h1>
 	<div class="chessboard">
 
-		<% 8.times do |row_coordinate| %>
-		  <div class="row" id="<%= row_coordinate %>">
+    <% 8.times do |row_coordinate| %>
+      <div class="row" id="<%= row_coordinate %>">
 
         <% 8.times do |column_coordinate| %>
           <% if row_coordinate.even? %>
