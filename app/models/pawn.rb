@@ -34,6 +34,10 @@ class Pawn < Piece
     move_to!(x_position: x, y_position: y)
   end
 
+  def promote?(y)
+    y == 0 && color = 'white' || y == 7 && color = 'black'
+  end
+
   def to_my_image_path
     # in assets/images
     "pawn_#{color}.svg"
