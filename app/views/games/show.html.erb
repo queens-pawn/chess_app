@@ -11,7 +11,7 @@
         var droppedOn = $(this);
         $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn);
         var x = droppedOn.index();
-        var y = droppedOn.parent('div').attr('id');
+        var y = droppedOn.parent('div').data('id');
         $.ajax({
           type: 'PUT',
           url: dropped.data('update-url'),
@@ -32,7 +32,7 @@
 	<div class="chessboard">
 
     <% 8.times do |row_coordinate| %>
-      <div class="row" id="<%= row_coordinate %>">
+      <div class="row" data-id="<%= row_coordinate %>">
 
         <% 8.times do |column_coordinate| %>
           <% if row_coordinate.even? %>
@@ -46,10 +46,10 @@
           <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
         <% end %>
 
-          </div><!-- column end -->
+          </div>
         <% end %>
 
-      </div><!-- row end -->
+      </div>
     <% end %>
 
   </div><!-- chessboard end -->
