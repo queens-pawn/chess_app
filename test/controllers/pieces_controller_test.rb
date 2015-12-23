@@ -8,7 +8,8 @@ class PiecesControllerTest < ActionController::TestCase
     piece.reload
     assert_equal 1, piece.x_position
     assert_equal 2, piece.y_position
-    assert_response :found
-    assert_redirected_to game_path(piece.game)
+    assert_response :ok
+    assert "updated!"
   end
+
 end
