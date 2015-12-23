@@ -6,7 +6,13 @@ class Pawn < Piece
     end
     x_distance = x_position - x
     y_distance = y_position - y
-    if occupied?(x, y)
+    if promote?(y)
+      if true
+        promotion(x, y, type)
+      else
+        return false
+      end
+    elsif occupied?(x, y)
       if color == 'white'
         x_distance.abs == 1 && y_distance == 1
       else
@@ -35,7 +41,21 @@ class Pawn < Piece
   end
 
   def promote?(y)
-    y == 0 && color = 'white' || y == 7 && color = 'black'
+    y == 0 && color == 'white' || y == 7 && color == 'black'
+  end
+
+  def promotion(x, y, type)
+    update_attributes(
+      x_position: nil,
+      y_position: nil
+    )
+
+    game.pieces.create(
+      x_position: x,
+      y_position: y,
+      type: type,
+      color: color
+    )
   end
 
   def to_my_image_path
