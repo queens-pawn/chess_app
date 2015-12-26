@@ -1,0 +1,20 @@
+.navbar.navbar-inverse {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-nav li a {
+  font-family: 'Noto Serif', serif; color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+// plus sign in front of NEW GAME nav item
+.glyphicon.glyphicon-plus-sign {
+  font-size: 14px;
+}
+
+.logo {
+  height: 40px;
+  padding-top: 5px;
+}
