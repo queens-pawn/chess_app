@@ -3,7 +3,7 @@
     $('.chessboard .row img').draggable({
       containment: '.chessboard',
       cursor: 'move',
-      revert: 'invalid',
+      revert: true,
     });
     $('.chessboard .row div').droppable({
       activeClass: "ui-state-hover",
@@ -21,7 +21,6 @@
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
           alert("Invalid move, try again.");
-          location.reload();
         })
         .done(function(data) {
           $(chessPiece).detach().css({top: 0, left: 0}).appendTo(droppedOn);
