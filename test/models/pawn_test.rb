@@ -17,6 +17,16 @@ class PawnTest < ActiveSupport::TestCase
     assert_equal true, @first_white_pawn.valid_move?(3, 4)
   end
 
+  test "White pawn first 2 steps foward, then 1 step foward" do
+    @first_white_pawn.move_to!(x_position: 3, y_position: 4)
+    assert_equal true, @first_white_pawn.valid_move?(3, 3)
+  end
+
+  test "Invalid white pawn first 2 steps foward, then 2 step forward" do
+    @first_white_pawn.move_to!(x_position: 3, y_position: 4)
+    assert_equal false, @first_white_pawn.valid_move?(3, 2)
+  end
+
   test "Invalid first move, too many steps foward" do
     assert_equal false, @first_white_pawn.valid_move?(3, 3)
     assert_equal false, @first_black_pawn.valid_move?(0, 5)
@@ -57,6 +67,11 @@ class PawnTest < ActiveSupport::TestCase
 
   test "After black first move, 1 space foward" do
     assert_equal true, @second_black_pawn.valid_move?(2, 3)
+  end
+
+  test 'Black pawn first move two steps foward, then 1 space foward' do
+    @first_black_pawn.move_to!(x_position: 0, y_position: 3)
+    assert_equal true, @first_black_pawn.valid_move?(0, 4)
   end
 
   test "White pawn right diagonal move to capture black" do
