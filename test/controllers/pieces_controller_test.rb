@@ -9,7 +9,7 @@ class PiecesControllerTest < ActionController::TestCase
     assert_equal 1, piece.x_position
     assert_equal 2, piece.y_position
     assert_response :ok
-    assert "updated!"
+    assert "valid_move"
   end
 
 end

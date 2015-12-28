@@ -3,25 +3,31 @@
     $('.chessboard .row img').draggable({
       containment: '.chessboard',
       cursor: 'move',
-      revert: 'invalid'
+      revert: 'invalid',
     });
     $('.chessboard .row div').droppable({
-      drop: function( event, ui ) {
-        var dropped = ui.draggable;
+      activeClass: "ui-state-hover",
+      hoverClass: "ui-state-active",
+      drop: function(event, ui) {
+        var chessPiece = ui.draggable;
         var droppedOn = $(this);
-        $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn);
         var x = droppedOn.index();
         var y = droppedOn.parent('div').data('id');
         $.ajax({
           type: 'PUT',
-          url: dropped.data('update-url'),
-          dataType: 'json',
+          url: chessPiece.data('update-url'),
+          dataType: 'text',
           data: {piece: {x_position: x, y_position: y}}
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          alert("Invalid move, try again.");
+          location.reload();
+        })
+        .done(function(data) {
+          $(chessPiece).detach().css({top: 0, left: 0}).appendTo(droppedOn);
         });
       }
     });
-    // disabling droppable on squares with a piece not yet working...
-    // $('div div').not('div:empty').droppable('disable');
   });//close ready 
 </script>
 
