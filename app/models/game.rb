@@ -44,7 +44,7 @@ class Game < ActiveRecord::Base
     if color == "black" 
       opposite_color = "white"
     else 
-      opposite_color = color
+      opposite_color = "black"
     end
     #find pieces still on board with opposite color (captured pieces are destroyed)
     opponents_pieces = pieces.where(color: opposite_color)
@@ -52,7 +52,7 @@ class Game < ActiveRecord::Base
     check = false
     opponents_pieces.each do |piece|
       if piece.valid_move?(king.x_position, king.y_position)
-        #@piece_causing_check = piece #to use when checking for checkmate
+        @piece_causing_check = piece #to use when checking for checkmate
         check = true      
         break         
       end
