@@ -22,35 +22,35 @@
     });
     // disabling droppable on squares with a piece not yet working...
     // $('div div').not('div:empty').droppable('disable');
-  });//close ready 
+  });//close ready
 </script>
 
 <br>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+  	<h1><%= @game.name %></h1>
+  	<div class="chessboard center-block">
 
-<div class="col-xs-10 col-xs-offset-1">
-	<h1><%= @game.name %></h1>
-	<div class="chessboard">
+      <% 8.times do |row_coordinate| %>
+        <div class="row" data-id="<%= row_coordinate %>">
 
-    <% 8.times do |row_coordinate| %>
-      <div class="row" data-id="<%= row_coordinate %>">
+          <% 8.times do |column_coordinate| %>
+            <% if row_coordinate.even? %>
+              <div class="<%= cycle("white even", "black even") %>">
+            <% else %>
+              <div class="<%= cycle("black odd", "white odd") %>">
+          <% end %>
 
-        <% 8.times do |column_coordinate| %>
-          <% if row_coordinate.even? %>
-            <div class="<%= cycle("white even", "black even") %>">
-          <% else %>
-            <div class="<%= cycle("black odd", "white odd") %>">
-        <% end %>
+          <!-- piece_at method in the pieces model -->
+          <% if @game.piece_at(column_coordinate, row_coordinate) %>
+            <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
+          <% end %>
 
-        <!-- piece_at method in the pieces model -->
-        <% if @game.piece_at(column_coordinate, row_coordinate) %>
-          <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
-        <% end %>
+            </div>
+          <% end %>
 
-          </div>
-        <% end %>
-
+        </div>
+      <% end %>
       </div>
-    <% end %>
-
-  </div><!-- chessboard end -->
-</div><!-- bootstrap grid css end -->
+    </div>
+</div>
