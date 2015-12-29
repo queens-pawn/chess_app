@@ -32,7 +32,7 @@
           })
         })
         .done(function() {
-          $(chessPiece).detach().css({top: 0, left: 0}).appendTo(droppedOn);
+          $(chessPiece).detach().appendTo(droppedOn);
         });
       }
     });
@@ -68,5 +68,5 @@
 
     </div><!-- chessboard end -->
   </div>
- <div class-"hide" id="dialog-message" title="Invalid Move">Please try again...</div> 
+ <div id="dialog-message" title="Invalid Move">Please try again...</div> 
 <div><!-- bootstrap grid css end -->
