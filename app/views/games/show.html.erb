@@ -3,7 +3,9 @@
     $('.chessboard .row img').draggable({
       containment: '.chessboard',
       cursor: 'move',
-      revert: true,
+      snap: '.row',
+      snapMode: 'center',
+      revert: true
     });
     $('.chessboard .row div').droppable({
       activeClass: "ui-state-hover",
@@ -19,10 +21,17 @@
           dataType: 'text',
           data: {piece: {x_position: x, y_position: y}}
         })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-          alert("Invalid move, try again.");
+        .fail(function() {
+          $('#dialog-message').dialog({
+            modal: true,
+            buttons: {
+            Ok: function() {
+              $(this).dialog('close');
+              }
+            }
+          })
         })
-        .done(function(data) {
+        .done(function() {
           $(chessPiece).detach().css({top: 0, left: 0}).appendTo(droppedOn);
         });
       }
@@ -59,5 +68,5 @@
 
     </div><!-- chessboard end -->
   </div>
+ <div class-"hide" id="dialog-message" title="Invalid Move">Please try again...</div> 
 <div><!-- bootstrap grid css end -->
-
