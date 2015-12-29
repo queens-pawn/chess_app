@@ -39,24 +39,24 @@ class Game < ActiveRecord::Base
     pieces.where(x_position: column_coordinate, y_position: row_coordinate).first
   end
 
-  def check?(color) 
-    # find position of king with colour  
-    king = game.pieces.find_by(type: "king", color: color)
-
+  def check?(color)   
+    king = pieces.find_by(type: 'King', color: color)
+    if color == "black" 
+      opposite_color = "white"
+    else 
+      opposite_color = color
+    end
     #find pieces still on board with opposite color (captured pieces are destroyed)
-    opponents_pieces = game.pieces.where(color: color)#opposite to color
-
+    opponents_pieces = pieces.where(color: opposite_color)
     #for each of opponents pieces check whether can move to position of king
+    check = false
     opponents_pieces.each do |piece|
       if piece.valid_move?(king.x_position, king.y_position)
-        @piece_causing_check = piece #to use when checking for checkmate 
-                                     #(is there ever more than one piece at a time causing check?)
-        game.check? = true #(add migration to add check? to game
-                           #either break if only one piece or carry on if more than one)
-      else
-        game.check? = false
+        #@piece_causing_check = piece #to use when checking for checkmate
+        check = true      
+        break         
       end
-      return game.check?
     end
+    check
   end
 end
