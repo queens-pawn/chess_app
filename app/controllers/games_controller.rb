@@ -25,6 +25,10 @@ class GamesController < ApplicationController
     redirect_to game_path(@game)
   end
 
+  def checkmate?(color)
+    king_in_check = pieces.find_by(type: 'King', color: color)
+  end
+
   private
 
   def game_params
