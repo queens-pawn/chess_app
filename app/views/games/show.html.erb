@@ -42,7 +42,7 @@
 <br>
 <div class="row">
   <div class="col-xs-10 col-xs-offset-1">
-  	<h1 class=""><%= @game.name %></h1>
+  	<h1><%= @game.name %></h1>
   	<div class="chessboard center-block">
 
       <% 8.times do |row_coordinate| %>
@@ -55,7 +55,6 @@
               <div class="<%= cycle("black odd", "white odd") %>">
           <% end %>
 
-          <!-- piece_at method in the pieces model -->
           <% if @game.piece_at(column_coordinate, row_coordinate) %>
             <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
           <% end %>
@@ -66,7 +65,7 @@
         </div>
       <% end %>
 
-    </div><!-- chessboard end -->
+    </div>
   </div>
  <div id="dialog-message" title="Invalid Move">Please try again...</div> 
-<div><!-- bootstrap grid css end -->
+<div>

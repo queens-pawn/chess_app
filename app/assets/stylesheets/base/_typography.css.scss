@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,700);
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Serif', serif;
+}
+
+.homepagetype {
+  font-size: 4.688em;
+  font-family: 'Noto Serif', serif;
+}
+
+.homepagebox {
+  background:rgba(0,0,0, 0.5);
+  color:white;
+  margin-top: 150px;
+
+}
+
+@media only screen and (max-width: 550px) {
+  .homepagetype { font-size:300%;}
+  }
+
+.clr {
+  clear:both;
+}
