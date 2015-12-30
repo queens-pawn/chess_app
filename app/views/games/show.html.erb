@@ -11,13 +11,13 @@
       activeClass: "ui-state-hover",
       hoverClass: "ui-state-active",
       drop: function(event, ui) {
-        var chessPiece = ui.draggable;
-        var droppedOn = $(this);
-        var x = droppedOn.index();
-        var y = droppedOn.parent('div').data('id');
+        var $chessPiece = ui.draggable;
+        var $droppedOn = $(this);
+        var x = $droppedOn.index();
+        var y = $droppedOn.parent('div').data('id');
         $.ajax({
           type: 'PUT',
-          url: chessPiece.data('update-url'),
+          url: $chessPiece.data('update-url'),
           dataType: 'text',
           data: {piece: {x_position: x, y_position: y}}
         })
@@ -32,7 +32,8 @@
           })
         })
         .done(function() {
-          $(chessPiece).detach().appendTo(droppedOn);
+          $droppedOn.empty();
+          $chessPiece.detach().appendTo($droppedOn);
         });
       }
     });
