@@ -1,3 +1,33 @@
+<br>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+  	<h1><%= @game.name %></h1>
+  	<div class="chessboard center-block">
+
+      <% 8.times do |row_coordinate| %>
+        <div class="row" data-id="<%= row_coordinate %>">
+
+          <% 8.times do |column_coordinate| %>
+            <% if row_coordinate.even? %>
+              <div class="<%= cycle("white even", "black even") %>">
+            <% else %>
+              <div class="<%= cycle("black odd", "white odd") %>">
+          <% end %>
+
+          <% if @game.piece_at(column_coordinate, row_coordinate) %>
+            <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
+          <% end %>
+
+            </div>
+          <% end %>
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+ <div id="dialog-message" title="Invalid Move">Please try again...</div> 
+<div>
 <script>
   $(function(){
     $('.chessboard .row img').draggable({
@@ -37,36 +67,5 @@
         });
       }
     });
-  });//close ready 
-</script>
-
-<br>
-<div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
-  	<h1><%= @game.name %></h1>
-  	<div class="chessboard center-block">
-
-      <% 8.times do |row_coordinate| %>
-        <div class="row" data-id="<%= row_coordinate %>">
-
-          <% 8.times do |column_coordinate| %>
-            <% if row_coordinate.even? %>
-              <div class="<%= cycle("white even", "black even") %>">
-            <% else %>
-              <div class="<%= cycle("black odd", "white odd") %>">
-          <% end %>
-
-          <% if @game.piece_at(column_coordinate, row_coordinate) %>
-            <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
-          <% end %>
-
-            </div>
-          <% end %>
-
-        </div>
-      <% end %>
-
-    </div>
-  </div>
- <div id="dialog-message" title="Invalid Move">Please try again...</div> 
-<div>
+  });
+</script> 
