@@ -20,7 +20,7 @@ class Pawn < Piece
       end
     else
       if has_moved
-        x_distance == 0 && y_distance == 1
+        x_distance == 0 && -y_distance == 1
       else
         (x_distance == 0 && -y_distance == 1) || (x_distance == 0 && -y_distance == 2)
       end

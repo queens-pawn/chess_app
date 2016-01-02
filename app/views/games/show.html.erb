@@ -1,30 +1,3 @@
-<script>
-  $(function(){
-    $('.chessboard .row img').draggable({
-      containment: '.chessboard',
-      cursor: 'move',
-      revert: 'invalid'
-    });
-    $('.chessboard .row div').droppable({
-      drop: function( event, ui ) {
-        var dropped = ui.draggable;
-        var droppedOn = $(this);
-        $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn);
-        var x = droppedOn.index();
-        var y = droppedOn.parent('div').data('id');
-        $.ajax({
-          type: 'PUT',
-          url: dropped.data('update-url'),
-          dataType: 'json',
-          data: {piece: {x_position: x, y_position: y}}
-        });
-      }
-    });
-    // disabling droppable on squares with a piece not yet working...
-    // $('div div').not('div:empty').droppable('disable');
-  });//close ready
-</script>
-
 <br>
 <div class="row">
   <div class="col-xs-10 col-xs-offset-1">
@@ -41,7 +14,6 @@
               <div class="<%= cycle("black odd", "white odd") %>">
           <% end %>
 
-          <!-- piece_at method in the pieces model -->
           <% if @game.piece_at(column_coordinate, row_coordinate) %>
             <img data-update-url="<%= piece_path(@game.piece_at(column_coordinate, row_coordinate).id) %>" src="/assets/<%= @game.piece_at(column_coordinate, row_coordinate).to_my_image_path %>">
           <% end %>
@@ -51,6 +23,49 @@
 
         </div>
       <% end %>
-      </div>
+
     </div>
-</div>
+  </div>
+ <div id="dialog-message" title="Invalid Move">Please try again...</div> 
+<div>
+<script>
+  $(function(){
+    $('.chessboard .row img').draggable({
+      containment: '.chessboard',
+      cursor: 'move',
+      snap: '.row',
+      snapMode: 'center',
+      revert: true
+    });
+    $('.chessboard .row div').droppable({
+      activeClass: "ui-state-hover",
+      hoverClass: "ui-state-active",
+      drop: function(event, ui) {
+        var $chessPiece = ui.draggable;
+        var $droppedOn = $(this);
+        var x = $droppedOn.index();
+        var y = $droppedOn.parent('div').data('id');
+        $.ajax({
+          type: 'PUT',
+          url: $chessPiece.data('update-url'),
+          dataType: 'text',
+          data: {piece: {x_position: x, y_position: y}}
+        })
+        .fail(function() {
+          $('#dialog-message').dialog({
+            modal: true,
+            buttons: {
+            Ok: function() {
+              $(this).dialog('close');
+              }
+            }
+          })
+        })
+        .done(function() {
+          $droppedOn.empty();
+          $chessPiece.detach().appendTo($droppedOn);
+        });
+      }
+    });
+  });
+</script> 
