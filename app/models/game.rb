@@ -74,7 +74,7 @@ class Game < ActiveRecord::Base
       if king_in_check.can_escape?
         return false
       end
-      return true # checkmate!
+      return true #checkmate!
     else
       return false
     end

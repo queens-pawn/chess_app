@@ -63,6 +63,7 @@ class Piece < ActiveRecord::Base
     return horizontal_obstruction?(x_destination, y_destination) if is_horizontal?(x_destination, y_destination)
     raise 'Invalid input. Not diagonal, horizontal or vertical.'
   end
+
   def move_to!(x_position: nil, y_position: nil)
     another_piece = self.game.piece_at(x_position, y_position)
     if another_piece #exists...
@@ -86,6 +87,15 @@ class Piece < ActiveRecord::Base
     return true
   end
 
+  def can_be_blocked?
+    opponents = pieces.where() ... # find opponents
+    opponents.each do |opponent|
+      if opponent.check? == check
+        # check if path can be blocked
+      end
+    end
+  end
+
   private
 
   def successful_move!(x_position: nil, y_position: nil)
@@ -94,5 +104,3 @@ class Piece < ActiveRecord::Base
   end
 
 end
-
- 
