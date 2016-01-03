@@ -88,9 +88,11 @@ class Piece < ActiveRecord::Base
   end
 
   def can_be_blocked?
+    king_in_check = pieces.find_by(type: 'King', color: color)
     opponents = pieces.where() ... # find opponents
+
     opponents.each do |opponent|
-      if opponent.check? == check
+      if king_in_check.check?(color) == check
         # check if path can be blocked
       end
     end
