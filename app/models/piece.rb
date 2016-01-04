@@ -88,13 +88,13 @@ class Piece < ActiveRecord::Base
   end
 
   def can_be_blocked?
-    king_in_check = pieces.find_by(type: 'King', color: color)
-    opponents = pieces.where() ... # find opponents
+    pieces_remaining = pieces.where(color: king.color)
+    #@piece_causing_check can somehow be referenced I think
 
-    opponents.each do |opponent|
-      if king_in_check.check?(color) == check
-        # check if path can be blocked
-      end
+    pieces_remaining.each do |piece|
+      # if piece.move_to!(x_position: king.x_position, y_position: king.y_position)
+      # end
+
     end
   end
 
