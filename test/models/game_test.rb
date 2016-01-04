@@ -96,4 +96,15 @@ class GameTest < ActiveSupport::TestCase
     # assert_equal false,  game.can_be_captured?('black') #b can't capture
   end
 
+  test "blocking working" do
+    game = FactoryGirl.create(:game)
+
+    King.create(color: 'black', x_position: 0, y_position: 7, game: game)
+    Rook.create(color: 'white', x_position: 0, y_position: 0, game: game)
+    Rook.create(color: 'black', x_position: 3, y_position: 3, game: game)
+
+    assert_equal true, game.check?('black')
+    assert_equal true, game.pieces.can_be_blocked?
+  end
+
 end

@@ -89,13 +89,13 @@ class Piece < ActiveRecord::Base
 
   def can_be_blocked?
     pieces_remaining = pieces.where(color: king.color)
-    #@piece_causing_check can somehow be referenced I think
 
     pieces_remaining.each do |piece|
-      # if piece.move_to!(x_position: king.x_position, y_position: king.y_position)
-      # end
-
+      (@piece_causing_check.y_position..king.y_position).each do |y_coord|
+        return true if piece.valid_move?(0, y_coord)
+      end
     end
+
   end
 
   private
