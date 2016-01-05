@@ -40,24 +40,34 @@ class Game < ActiveRecord::Base
   end
 
   def check?(color)
+    !!piece_causing_check(color)
+  end
+
+  def piece_causing_check(color)
     king = pieces.find_by(type: 'King', color: color)
-    if color == "black"
-      opposite_color = "white"
+    opposite_color = if color == "black"
+      "white"
     else
-      opposite_color = "black"
+      "black"
     end
     #find pieces still on board with opposite color (captured pieces are destroyed)
     opponents_pieces = pieces.where(color: opposite_color)
-    #for each of opponents pieces check whether can move to position of king
-    check = false
-    opponents_pieces.each do |piece|
-      if piece.valid_move?(king.x_position, king.y_position)
-        @piece_causing_check = piece #to use when checking for checkmate
-        check = true
-        break
+
+    opponents_pieces.find do |piece|
+      piece.valid_move?(king.x_position, king.y_position)
+    end
+  end
+
+  def can_be_blocked?
+    king = pieces.find_by(type: 'King', color: 'black')
+    pieces_remaining = pieces.where(color: king.color)
+
+    pieces_remaining.each do |piece|
+      (piece_causing_check.y_position..king.y_position).each do |y_coord|
+        return true if piece.valid_move?(0, y_coord)
       end
     end
-    check
+
   end
 
   def checkmate?(color)
@@ -65,10 +75,10 @@ class Game < ActiveRecord::Base
 
     # check if these conditions exist
     if check?(color)
-      if @piece_causing_check.can_be_blocked?
+      if piece_causing_check.can_be_blocked?
         return false
       end
-      if @piece_causing_check.can_be_captured?
+      if piece_causing_check.can_be_captured?
         return false
       end
       if king_in_check.can_escape?
