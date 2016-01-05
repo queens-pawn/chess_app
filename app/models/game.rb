@@ -58,9 +58,15 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def can_be_blocked?
+  def can_be_blocked?(color)
     king = pieces.find_by(type: 'King', color: 'black')
     pieces_remaining = pieces.where(color: king.color)
+
+    if king.color == 'black'
+      color = 'white'
+    else
+      color = 'black'
+    end
 
     pieces_remaining.each do |piece|
       (piece_causing_check.y_position..king.y_position).each do |y_coord|
@@ -68,6 +74,7 @@ class Game < ActiveRecord::Base
       end
     end
 
+    return false
   end
 
   def checkmate?(color)
@@ -75,10 +82,10 @@ class Game < ActiveRecord::Base
 
     # check if these conditions exist
     if check?(color)
-      if piece_causing_check.can_be_blocked?
+      if can_be_blocked?
         return false
       end
-      if piece_causing_check.can_be_captured?
+      if can_be_captured?
         return false
       end
       if king_in_check.can_escape?
