@@ -39,39 +39,68 @@ class Game < ActiveRecord::Base
     pieces.where(x_position: column_coordinate, y_position: row_coordinate).first
   end
 
+  # def check?(color)
+  #   king = pieces.find_by(type: 'King', color: color)
+  #   if color == "black"
+  #     opposite_color = "white"
+  #   else
+  #     opposite_color = "black"
+  #   end
+  #   #find pieces still on board with opposite color (captured pieces are destroyed)
+  #   opponents_pieces = pieces.where(color: opposite_color)
+  #   #for each of opponents pieces check whether can move to position of king
+  #   check = false
+  #   opponents_pieces.each do |piece|
+  #     if piece.valid_move?(king.x_position, king.y_position)
+  #       @piece_causing_check = piece #to use when checking for checkmate
+  #       check = true
+  #       break
+  #     end
+  #   end
+  #   check
+  # end
+
   def check?(color)
+    !!piece_causing_check(color)
+  end
+
+  def piece_causing_check(color)
     king = pieces.find_by(type: 'King', color: color)
-    if color == "black"
-      opposite_color = "white"
+    opposite_color = if color == "black"
+      "white"
     else
-      opposite_color = "black"
+      "black"
     end
-    #find pieces still on board with opposite color (captured pieces are destroyed)
+    
     opponents_pieces = pieces.where(color: opposite_color)
-    #for each of opponents pieces check whether can move to position of king
-    check = false
-    opponents_pieces.each do |piece|
-      if piece.valid_move?(king.x_position, king.y_position)
-        @piece_causing_check = piece #to use when checking for checkmate
-        check = true
-        break
-      end
+
+    opponents_pieces.find do |piece|
+      piece.valid_move?(king.x_position, king.y_position)
     end
-    check
+
+  end
+
+  def can_be_captured?
+    king = pieces.find_by(type: 'King')
+    pieces_remaining = pieces.where(color: king.color)
+
+    # puts piece_causing_check(king.color).x_position
+    # puts piece_causing_check(king.color).y_position
+
+    pieces_remaining.each do |piece|
+      if piece.valid_move?(piece_causing_check(king.color).x_position, piece_causing_check(king.color).y_position)
+       return true 
+      end 
+    end
+
+    return false 
   end
 
   def checkmate?(color)
     king_in_check = pieces.find_by(type: 'King', color: color)
 
-    # check if these conditions exist
     if check?(color)
-      if @piece_causing_check.can_be_blocked?
-        return false
-      end
-      if @piece_causing_check.can_be_captured?
-        return false
-      end
-      if king_in_check.can_escape?
+      if can_be_captured?
         return false
       end
       return true #checkmate!

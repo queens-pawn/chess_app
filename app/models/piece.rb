@@ -87,16 +87,20 @@ class Piece < ActiveRecord::Base
     return true
   end
 
-  def can_be_blocked?
-    king_in_check = pieces.find_by(type: 'King', color: color)
-    opponents = pieces.where() ... # find opponents
+  # def can_be_blocked?
+  #   pieces_remaining = pieces.where(color: king.color)
 
-    opponents.each do |opponent|
-      if king_in_check.check?(color) == check
-        # check if path can be blocked
-      end
-    end
-  end
+  #   pieces_remaining.each do |piece|
+  #     (@piece_causing_check.y_position..king.y_position).each do |y_coord|
+  #       return true if piece.valid_move?(0, y_coord)
+  #     end
+  #   end
+
+  # end
+
+
+
+
 
   private
 
