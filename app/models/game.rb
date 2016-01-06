@@ -58,18 +58,18 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def can_be_blocked?(color)
+  def can_be_blocked?(opposite_color)
     king = pieces.find_by(type: 'King', color: 'black')
     pieces_remaining = pieces.where(color: king.color)
 
     if king.color == 'black'
-      color = 'white'
+      opposite_color = 'white'
     else
-      color = 'black'
+      opposite_color = 'black'
     end
 
     pieces_remaining.each do |piece|
-      (piece_causing_check.y_position..king.y_position).each do |y_coord|
+      (piece_causing_check(opposite_color).y_position..king.y_position).each do |y_coord|
         return true if piece.valid_move?(0, y_coord)
       end
     end

@@ -104,7 +104,7 @@ class GameTest < ActiveSupport::TestCase
     Rook.create(color: 'black', x_position: 3, y_position: 3, game: game)
 
     assert_equal true, game.check?('black')
-    assert_equal true, game.can_be_blocked?
+    assert_equal true, game.can_be_blocked?('white')
   end
 
 end
