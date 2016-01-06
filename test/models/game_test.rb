@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'rr'
 
 class GameTest < ActiveSupport::TestCase
 
@@ -100,9 +101,9 @@ class GameTest < ActiveSupport::TestCase
     game = FactoryGirl.create(:game)
 
     King.create(color: 'black', x_position: 0, y_position: 7, game: game)
-    Rook.create(color: 'white', x_position: 0, y_position: 0, game: game)
+    target = Rook.create(color: 'white', x_position: 0, y_position: 0, game: game)
     Rook.create(color: 'black', x_position: 3, y_position: 3, game: game)
-
+    stub(game).piece_causing_check {target}
     assert_equal true, game.check?('black')
     assert_equal true, game.can_be_blocked?('white')
   end
