@@ -58,8 +58,8 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def can_be_blocked?(opposite_color)
-    king = pieces.find_by(type: 'King', color: 'black')
+  def can_be_blocked?(color)
+    king = pieces.find_by(type: 'King')
     pieces_remaining = pieces.where(color: king.color)
 
     if king.color == 'black'

@@ -11,16 +11,16 @@ class GameTest < ActiveSupport::TestCase
 
   def setup
     @game = FactoryGirl.create(:game)
-    @game.populate_board!
-    @game.save
   end
 
   test "any opposite pieces causing check false" do
+    @game.populate_board!
     assert_equal false, @game.check?("white")
     assert_equal false, @game.check?("black")
   end
 
   test "any pieces causing check true 1" do
+    @game.populate_board!
 
     b_pawn1 = @game.pieces.find_by(type: "Pawn", x_position: 5, y_position: 1)
     b_pawn1.update_attributes(x_position: 5, y_position: 3)
@@ -98,14 +98,13 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test "blocking working" do
-    game = FactoryGirl.create(:game)
+    King.create(color: 'black', x_position: 0, y_position: 7, game: @game)
+    target = Rook.create(color: 'white', x_position: 0, y_position: 0, game: @game)
+    Rook.create(color: 'black', x_position: 3, y_position: 3, game: @game)
+    stub(@game).piece_causing_check {target}
 
-    King.create(color: 'black', x_position: 0, y_position: 7, game: game)
-    target = Rook.create(color: 'white', x_position: 0, y_position: 0, game: game)
-    Rook.create(color: 'black', x_position: 3, y_position: 3, game: game)
-    stub(game).piece_causing_check {target}
-    assert_equal true, game.check?('black')
-    assert_equal true, game.can_be_blocked?('white')
+    assert_equal true, @game.check?('black')
+    assert_equal true, @game.can_be_blocked?('white')
   end
 
 end
