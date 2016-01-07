@@ -20,29 +20,27 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test "no checkmate for black" do
-    game = FactoryGirl.create(:game)
+    FactoryGirl.create(:piece, type: 'King', color: 'black', x_position: 2, y_position: 0, game: @game)
+    FactoryGirl.create(:piece, type: 'Bishop', color: 'black', x_position: 4, y_position: 0, game: @game)
+    FactoryGirl.create(:piece, type: 'Rook', color: 'black', x_position: 0, y_position: 3, game: @game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 0, y_position: 1, game: @game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 1, y_position: 1, game: @game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 2, y_position: 1, game: @game)
 
-    FactoryGirl.create(:piece, type: 'King', color: 'black', x_position: 2, y_position: 0, game: game)
-    FactoryGirl.create(:piece, type: 'Bishop', color: 'black', x_position: 4, y_position: 0, game: game)
-    FactoryGirl.create(:piece, type: 'Rook', color: 'black', x_position: 0, y_position: 3, game: game)
-    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 0, y_position: 1, game: game)
-    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 1, y_position: 1, game: game)
-    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 2, y_position: 1, game: game)
+    FactoryGirl.create(:piece, type: 'King', color: 'white', x_position: 6, y_position: 7, game: @game)
+    target_piece = FactoryGirl.create(:piece, type: 'Bishop', color: 'white', x_position: 5, y_position: 3, game: @game)
+    FactoryGirl.create(:piece, type: 'Rook', color: 'white', x_position: 5, y_position: 7, game: @game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 5, y_position: 6, game: @game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 6, y_position: 5, game: @game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 7, y_position: 6, game: @game)
 
-    FactoryGirl.create(:piece, type: 'King', color: 'white', x_position: 6, y_position: 7, game: game)
-    target_piece = FactoryGirl.create(:piece, type: 'Bishop', color: 'white', x_position: 5, y_position: 3, game: game)
-    FactoryGirl.create(:piece, type: 'Rook', color: 'white', x_position: 5, y_position: 7, game: game)
-    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 5, y_position: 6, game: game)
-    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 6, y_position: 5, game: game)
-    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 7, y_position: 6, game: game)
+    stub(@game).piece_causing_check { target_piece }
 
-    stub(game).piece_causing_check { target_piece }
-
-    assert_equal 12,    game.pieces.count
-    assert_equal true,  game.can_be_captured?
-    assert_equal true,  game.can_be_blocked?('black') # returning false
-    assert_equal false, game.checkmate?('black')
-    assert_equal false, game.checkmate?('white')
+    assert_equal 12,    @game.pieces.count
+    assert_equal true,  @game.can_be_captured?
+    assert_equal true,  @game.can_be_blocked?('black') # returning false
+    assert_equal false, @game.checkmate?('black')
+    assert_equal false, @game.checkmate?('white')
   end
 
   test "any pieces causing check true 1" do
