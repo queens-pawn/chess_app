@@ -34,31 +34,9 @@ class Game < ActiveRecord::Base
     Piece.create(:type => 'Queen', :color => 'white', :game_id => id, :x_position => 3, :y_position => 7)
   end
 
-  # calling this in show.html.erb
   def piece_at(column_coordinate, row_coordinate)
     pieces.where(x_position: column_coordinate, y_position: row_coordinate).first
   end
-
-  # def check?(color)
-  #   king = pieces.find_by(type: 'King', color: color)
-  #   if color == "black"
-  #     opposite_color = "white"
-  #   else
-  #     opposite_color = "black"
-  #   end
-  #   #find pieces still on board with opposite color (captured pieces are destroyed)
-  #   opponents_pieces = pieces.where(color: opposite_color)
-  #   #for each of opponents pieces check whether can move to position of king
-  #   check = false
-  #   opponents_pieces.each do |piece|
-  #     if piece.valid_move?(king.x_position, king.y_position)
-  #       @piece_causing_check = piece #to use when checking for checkmate
-  #       check = true
-  #       break
-  #     end
-  #   end
-  #   check
-  # end
 
   def check?(color)
     !!piece_causing_check(color)
@@ -84,9 +62,6 @@ class Game < ActiveRecord::Base
     king = pieces.find_by(type: 'King')
     pieces_remaining = pieces.where(color: king.color)
 
-    # puts piece_causing_check(king.color).x_position
-    # puts piece_causing_check(king.color).y_position
-
     pieces_remaining.each do |piece|
       if piece.valid_move?(piece_causing_check(king.color).x_position, piece_causing_check(king.color).y_position)
        return true 
@@ -103,7 +78,7 @@ class Game < ActiveRecord::Base
       if can_be_captured?
         return false
       end
-      return true #checkmate!
+      return true
     else
       return false
     end

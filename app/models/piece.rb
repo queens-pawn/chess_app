@@ -86,22 +86,7 @@ class Piece < ActiveRecord::Base
     end
     return true
   end
-
-  # def can_be_blocked?
-  #   pieces_remaining = pieces.where(color: king.color)
-
-  #   pieces_remaining.each do |piece|
-  #     (@piece_causing_check.y_position..king.y_position).each do |y_coord|
-  #       return true if piece.valid_move?(0, y_coord)
-  #     end
-  #   end
-
-  # end
-
-
-
-
-
+  
   private
 
   def successful_move!(x_position: nil, y_position: nil)
