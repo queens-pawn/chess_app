@@ -58,6 +58,19 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def can_be_captured?
+    king = pieces.find_by(type: 'King')
+    pieces_remaining = pieces.where(color: king.color)
+
+    pieces_remaining.each do |piece|
+      if piece.valid_move?(piece_causing_check(king.color).x_position, piece_causing_check(king.color).y_position)
+       return true
+      end
+    end
+
+    return false
+  end
+
   def can_be_blocked?(color)
     king = pieces.find_by(type: 'King')
     pieces_remaining = pieces.where(color: king.color)
@@ -68,9 +81,14 @@ class Game < ActiveRecord::Base
       opposite_color = 'black'
     end
 
+    # looping through remaining pieces and finding the range between the ...
+    # piece_causing_check and the king being checked
+    # if a move to a square along this path can be blocked then method passes
     pieces_remaining.each do |piece|
       (piece_causing_check(opposite_color).y_position..king.y_position).each do |y_coord|
-        return true if piece.valid_move?(0, y_coord)
+        (piece_causing_check(opposite_color).x_position..king.x_position).each do |x_coord|
+            return true if piece.valid_move?(x_coord, y_coord)
+        end
       end
     end
 
