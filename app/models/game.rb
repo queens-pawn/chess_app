@@ -85,12 +85,40 @@ class Game < ActiveRecord::Base
     # piece_causing_check and the king being checked
     # if a move to a square along this path can be blocked then method passes
     pieces_remaining.each do |piece|
-      (piece_causing_check(opposite_color).y_position..king.y_position).each do |y_coord|
-        (piece_causing_check(opposite_color).x_position..king.x_position).each do |x_coord|
-            return true if piece.valid_move?(x_coord, y_coord)
-        end
-      end
-    end
+      if king.y_position <= piece_causing_check(opposite_color).y_position
+        (king.y_position..piece_causing_check(opposite_color).y_position).each do |y_coord|
+
+          if king.x_position <= piece_causing_check(opposite_color).x_position
+            (king.x_position..piece_causing_check(opposite_color).x_position).each do |x_coord|
+              return true if piece.valid_move?(x_coord, y_coord)
+            end
+
+          else
+            (piece_causing_check(opposite_color).x_position..king.x_position).each do |x_coord|
+              return true if piece.valid_move?(x_coord, y_coord)
+            end
+
+          end #if statement
+        end # y_coord loop
+
+      else
+        (piece_causing_check(opposite_color).y_position..king.y_position).each do |y_coord|
+          if king.x_position <= piece_causing_check(opposite_color).x_position
+            (king.x_position..piece_causing_check(opposite_color).x_position).each do |x_coord|
+              return true if piece.valid_move?(x_coord, y_coord)
+            end
+
+          else
+            (piece_causing_check(opposite_color).x_position..king.x_position).each do |x_coord|
+              return true if piece.valid_move?(x_coord, y_coord)
+            end
+
+          end # if statement
+        end  # y_coord
+
+      end # big if statement
+
+    end # END of pieces_remaining.each do
 
     return false
   end
