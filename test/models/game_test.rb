@@ -43,6 +43,30 @@ class GameTest < ActiveSupport::TestCase
     #assert_equal false, @game.checkmate?('white')
   end
 
+
+  test "checkmate for black2" do
+    game = FactoryGirl.create(:game)
+
+    FactoryGirl.create(:piece, type: 'King', color: 'black', x_position: 6, y_position: 0, game: game)
+    FactoryGirl.create(:piece, type: 'Queen', color: 'black', x_position: 6, y_position: 3, game: game)
+    FactoryGirl.create(:piece, type: 'Rook', color: 'black', x_position: 1, y_position: 5, game: game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 5, y_position: 1, game: game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 6, y_position: 1, game: game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'black', x_position: 7, y_position: 1, game: game)
+
+    FactoryGirl.create(:piece, type: 'King', color: 'white', x_position: 6, y_position: 7, game: game)
+    target_piece = FactoryGirl.create(:piece, type: 'Queen', color: 'white', x_position: 4, y_position: 0, game: game)
+    FactoryGirl.create(:piece, type: 'Rook', color: 'white', x_position: 5, y_position: 7, game: game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 5, y_position: 6, game: game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 6, y_position: 6, game: game)
+    FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 7, y_position: 6, game: game)
+
+    stub(game).piece_causing_check { target_piece }
+
+    assert_equal false, game.can_be_blocked?('black')
+
+  end
+
   test "any pieces causing check true 1" do
     @game.populate_board!
 
