@@ -12,5 +12,3 @@ The Queen's Pawn team is composed of the following members:
 [Mark Eberhard](https://github.com/mce777)
 
 The Queen's Pawn team is led by [Kaoru Kohashigawa](https://github.com/KaoruDev).
-
-Visit Queen's Pawn Chess live at [queens-pawn-chess.herokuapp.com/](https://queens-pawn-chess.herokuapp.com/)
