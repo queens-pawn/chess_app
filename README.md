@@ -1,7 +1,7 @@
 #Queen's Pawn Chess
 
 
-This is a chess app built in Ruby on Rails by the Queen's Pawn team for The [Firehose Project](http://www.thefirehoseproject.com/).
+This is a chess app built in Ruby on Rails by the Queen's Pawn team for [The Firehose Project](http://www.thefirehoseproject.com/).
 
 The Queen's Pawn team is composed of the following members:
 
