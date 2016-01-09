@@ -83,7 +83,6 @@ class Game < ActiveRecord::Base
 
     # looping through remaining pieces and finding the range between the ...
     # piece_causing_check and the king being checked
-    # if a move to a square along this path can be blocked then method passes
     pieces_remaining.each do |piece|
       if king.y_position <= piece_causing_check(opposite_color).y_position
         (king.y_position..piece_causing_check(opposite_color).y_position).each do |y_coord|
