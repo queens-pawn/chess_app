@@ -44,7 +44,6 @@ class GameTest < ActiveSupport::TestCase
     assert_equal false, @game.checkmate?('white')
   end
 
-
   test "checkmate for black2" do
     King.create(color: 'black', x_position: 6, y_position: 0, game: @game)
     Queen.create(color: 'black', x_position: 6, y_position: 3, game: @game)
