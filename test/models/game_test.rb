@@ -10,6 +10,7 @@ class GameTest < ActiveSupport::TestCase
   end
 
   def setup
+    #sets up a game without polulating the board
     @game = FactoryGirl.create(:game)
   end
 
@@ -35,12 +36,12 @@ class GameTest < ActiveSupport::TestCase
     FactoryGirl.create(:piece, type: 'Pawn', color: 'white', x_position: 7, y_position: 6, game: @game)
 
     stub(@game).piece_causing_check { target_piece }
-
+    # these all pass !
     assert_equal 12,    @game.pieces.count
     assert_equal true,  @game.can_be_captured?
-    assert_equal true,  @game.can_be_blocked?('black') # returning false
-    #assert_equal false, @game.checkmate?('black')
-    #assert_equal false, @game.checkmate?('white')
+    assert_equal true,  @game.can_be_blocked?('black')
+    assert_equal false, @game.checkmate?('black')
+    assert_equal false, @game.checkmate?('white')
   end
 
 
@@ -65,7 +66,7 @@ class GameTest < ActiveSupport::TestCase
 
   end
 
-  test "any pieces causing check true 1" do
+  test "causing check" do
     @game.populate_board!
 
     b_pawn1 = @game.pieces.find_by(type: "Pawn", x_position: 5, y_position: 1)
@@ -80,12 +81,6 @@ class GameTest < ActiveSupport::TestCase
     white_queen = @game.pieces.find_by(type: "Queen", x_position: 3, y_position: 7)
     white_queen.update_attributes(x_position: 7, y_position: 3)
 
-    assert_equal true, @game.check?("black")
-  end
-
-  test "any pieces causing check true 2" do
-    Pawn.destroy_all(color: 'black', game: @game)
-    @game.pieces.create(type: "Bishop", color: "white", x_position: 6, y_position: 2)
     assert_equal true, @game.check?("black")
   end
 
@@ -147,10 +142,29 @@ class GameTest < ActiveSupport::TestCase
     King.create(color: 'black', x_position: 0, y_position: 7, game: @game)
     target = Rook.create(color: 'white', x_position: 0, y_position: 0, game: @game)
     Rook.create(color: 'black', x_position: 3, y_position: 3, game: @game)
+
     stub(@game).piece_causing_check {target}
 
     assert_equal true, @game.check?('black')
     assert_equal true, @game.can_be_blocked?('black')
+  end
+
+  test "king can escape" do
+    testking = King.create(color: 'black', x_position: 0, y_position: 7, game: @game)
+    Rook.create(color: 'white', x_position: 0, y_position: 0, game: @game)
+    Rook.create(color: 'black', x_position: 3, y_position: 3, game: @game)
+
+    assert_equal true, @game.check?('black')
+    assert_equal true, testking.can_escape? # returning false
+  end
+
+  test "king no escape" do
+    testking = King.create(color: 'black', x_position: 0, y_position: 0, game: @game)
+    Rook.create(color: 'white', x_position: 0, y_position: 1, game: @game)
+    Rook.create(color: 'white', x_position: 1, y_position: 1, game: @game)
+
+    assert_equal true, @game.check?('black')
+    assert_equal false, testking.can_escape?
   end
 
 end

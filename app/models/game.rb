@@ -126,7 +126,7 @@ class Game < ActiveRecord::Base
 
     # check if these conditions exist
     if check?(color)
-      if can_be_blocked?
+      if can_be_blocked?(color)
         return false
       end
       if can_be_captured?
@@ -139,7 +139,7 @@ class Game < ActiveRecord::Base
     else
       return false
     end
-    
+
   end
 
 end
