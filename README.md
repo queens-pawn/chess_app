@@ -1,16 +1,13 @@
 #Queen's Pawn Chess
 
 
-This is a chess app built in Ruby on Rails by the Queen's Pawn team for The [Firehose Project](http://www.thefirehoseproject.com/).
+This is an online chess app built in Ruby on Rails by the Queen's Pawn team for [The Firehose Project](http://www.thefirehoseproject.com/).
 
 The Queen's Pawn team is composed of the following members:
 
-[Alan Lim](https://github.com/alan24)
-[Delaine Lawrence](https://github.com/Delaine)
-[Johann Billar](https://github.com/JohannBillar)
-[Lorna Marlow](https://github.com/llmarlow)
+[Alan Lim](https://github.com/alan24) –
+[Johann Billar](https://github.com/JohannBillar) –
+[Lorna Marlow](https://github.com/llmarlow) –
 [Mark Eberhard](https://github.com/mce777)
 
-The Queen's Pawn team is led by [Kaoru Kohashigawa](https://github.com/KaoruDev).
-
-Visit Queen's Pawn Chess live at [queens-pawn-chess.herokuapp.com/](https://queens-pawn-chess.herokuapp.com/)
+Currently in the final stages of completion and viewable live at [https://queens-pawn-chess.herokuapp.com/](https://queens-pawn-chess.herokuapp.com/)
