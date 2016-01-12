@@ -14,7 +14,7 @@ class GameTest < ActiveSupport::TestCase
     @game = FactoryGirl.create(:game)
   end
 
-  test "any opposite pieces causing check false" do
+  test "any" do
     @game.populate_board!
     assert_equal false, @game.check?("white")
     assert_equal false, @game.check?("black")
@@ -61,7 +61,10 @@ class GameTest < ActiveSupport::TestCase
 
     stub(@game).piece_causing_check { target_piece }
 
-    assert_equal false, @game.can_be_blocked?('black')
+    assert_equal false, @game.can_be_blocked?('black') # returning true for some reason
+    # assert_equal false,  game.can_escape?('black') #b king no moves
+    # assert_equal false,  game.can_be_blocked?('black') #b  no pieces can block
+    # assert_equal false,  game.can_be_captured?('black') #b can't capture
 
   end
 
@@ -83,58 +86,12 @@ class GameTest < ActiveSupport::TestCase
     assert_equal true, @game.check?("black")
   end
 
-  test "Checkmate is false" do
-    game = FactoryGirl.create(:game)
-
-    King.create(  color: 'black', x_position: 2, y_position: 0, game: game)
-    Bishop.create(color: 'black', x_position: 4, y_position: 0, game: game)
-    Rook.create(  color: 'black', x_position: 0, y_position: 3, game: game)
-    Pawn.create(  color: 'black', x_position: 0, y_position: 1, game: game)
-    Pawn.create(  color: 'black', x_position: 1, y_position: 1, game: game)
-    Pawn.create(  color: 'black', x_position: 2, y_position: 1, game: game)
-
-    King.create(  color: 'white', x_position: 6, y_position: 7, game: game)
-    Bishop.create(color: 'white', x_position: 5, y_position: 3, game: game)
-    Rook.create(  color: 'white', x_position: 5, y_position: 7, game: game)
-    Pawn.create(  color: 'white', x_position: 5, y_position: 6, game: game)
-    Pawn.create(  color: 'white', x_position: 6, y_position: 5, game: game)
-    Pawn.create(  color: 'white', x_position: 7, y_position: 6, game: game)
-
-    assert_equal 12,    game.pieces.count
-    assert_equal true,  game.check?('black')
-    assert_equal false, game.check?('white')
-
-    assert_equal false, game.checkmate?('black')
-    # assert_equal true,  game.can_escape?('black') #b king B8
-    # assert_equal true,  game.can_be_blocked?('black') #b bishop D7
-    # assert_equal true,  game.can_be_captured?('black') #b rook F5
-  end
-
-  test "Checkmate is true" do
-    game = FactoryGirl.create(:game)
-
-    King.create(  color: 'black', x_position: 6, y_position: 0, game: game)
-    Queen.create( color: 'black', x_position: 6, y_position: 3, game: game)
-    Rook.create(  color: 'black', x_position: 1, y_position: 5, game: game)
-    Pawn.create(  color: 'black', x_position: 5, y_position: 1, game: game)
-    Pawn.create(  color: 'black', x_position: 6, y_position: 1, game: game)
-    Pawn.create(  color: 'black', x_position: 7, y_position: 1, game: game)
-
-    King.create(  color: 'white', x_position: 6, y_position: 7, game: game)
-    Queen.create( color: 'white', x_position: 4, y_position: 0, game: game)
-    Rook.create(  color: 'white', x_position: 5, y_position: 7, game: game)
-    Pawn.create(  color: 'white', x_position: 5, y_position: 6, game: game)
-    Pawn.create(  color: 'white', x_position: 6, y_position: 6, game: game)
-    Pawn.create(  color: 'white', x_position: 7, y_position: 6, game: game)
-
-    assert_equal 12,    game.pieces.count
-    assert_equal true,  game.check?('black')
-    assert_equal false, game.check?('white')
-
-    assert_equal true,  game.checkmate?('black')
-    # assert_equal false,  game.can_escape?('black') #b king no moves
-    # assert_equal false,  game.can_be_blocked?('black') #b  no pieces can block
-    # assert_equal false,  game.can_be_captured?('black') #b can't capture
+  #not passing (lm)
+  test "any2" do
+    @game.populate_board!
+    Pawn.destroy_all(color: 'black', game: @game)
+    @game.pieces.create(x_position: 2, y_position: 6, type: 'Bishop', color: 'white')
+    assert_equal true, @game.check?('black')
   end
 
   test "blocking working" do
