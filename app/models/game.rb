@@ -45,16 +45,16 @@ class Game < ActiveRecord::Base
 
   def piece_causing_check(color)
     king = pieces.find_by(type: 'King', color: color)
-    opposite_color = if color == "black"
-      "white"
+    if color == "black"
+      opposite_color = "white"
     else
-      "black"
+      opposite_color = "black"
     end
     #find pieces still on board with opposite color (captured pieces are destroyed)
     opponents_pieces = pieces.where(color: opposite_color)
 
     opponents_pieces.find do |piece|
-      piece.valid_move?(king.x_position, king.y_position)
+      piece.valid_move?(king.x_position, king.y_position) && !piece.is_obstructed?(king.x_position, king.y_position)
     end
   end
 

@@ -20,7 +20,7 @@ class King < Piece
       ((y_position - 1)..(y_position + 1)).each do |y_coord|
         if valid_move?(x_coord, y_coord)
           update_attributes(x_position: x_coord, y_position: y_coord)
-          return true if !game.check?(color) #returns true if any move enables 'escape'
+          return true if !game.check?(color) #returns true if any move enables 'escape'v
         end
 
         update_attributes(x_position: king_x, y_position: king_y)

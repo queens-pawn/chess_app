@@ -53,18 +53,17 @@ class GameTest < ActiveSupport::TestCase
     Pawn.create(color: 'black', x_position: 7, y_position: 1, game: @game)
 
     King.create(color: 'white', x_position: 6, y_position: 7, game: @game)
-    target_piece = Queen.create(color: 'white', x_position: 0, y_position: 0, game: @game)
+    target_piece = Queen.create(color: 'white', x_position: 4, y_position: 0, game: @game)
     Rook.create(color: 'white', x_position: 5, y_position: 7, game: @game)
     Pawn.create(color: 'white', x_position: 5, y_position: 6, game: @game)
     Pawn.create(color: 'white', x_position: 6, y_position: 6, game: @game)
     Pawn.create(color: 'white', x_position: 7, y_position: 6, game: @game)
 
-    stub(@game).piece_causing_check { target_piece }
+    #stub(@game).piece_causing_check { target_piece }
 
     assert_equal false, @game.can_be_blocked?('black') # returning true for some reason
-    # assert_equal false,  game.can_escape?('black') #b king no moves
-    # assert_equal false,  game.can_be_blocked?('black') #b  no pieces can block
-    # assert_equal false,  game.can_be_captured?('black') #b can't capture
+    # assert_equal false,  @game.can_escape?('black') #b king no moves
+    # assert_equal false,  @game.can_be_captured?('black') #b can't capture
 
   end
 
