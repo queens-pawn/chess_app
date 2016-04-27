@@ -63,6 +63,7 @@ class Piece < ActiveRecord::Base
     return horizontal_obstruction?(x_destination, y_destination) if is_horizontal?(x_destination, y_destination)
     raise 'Invalid input. Not diagonal, horizontal or vertical.'
   end
+
   def move_to!(x_position: nil, y_position: nil)
     another_piece = self.game.piece_at(x_position, y_position)
     if another_piece #exists...
@@ -94,5 +95,3 @@ class Piece < ActiveRecord::Base
   end
 
 end
-
- 

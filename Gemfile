@@ -50,6 +50,7 @@ gem 'devise', '>= 3.2.4'
 group :test do
   gem 'shoulda-context'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'rr', require: false
 end
 
 # Use ActiveModel has_secure_password
